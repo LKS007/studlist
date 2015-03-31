@@ -128,17 +128,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DataAccessLevel\CurrentWeather.cs" />
-    <Compile Include="DataAccessLevel\DailyForecastsDataContext.cs" />
-    <Compile Include="DataAccessLevel\Forecast.cs" />
-    <Compile Include="DataAccessLevel\HourlyForecastsDataContext.cs" />
-    <Compile Include="DataAccessLevel\PagingRequest.cs" />
-    <Compile Include="DataAccessLevel\RegionsCitiesDataContext.cs" />
-    <Compile Include="DataAccessLevel\SettingsDataContext.cs" />
-    <Compile Include="DataAccessLevel\SQLiteDatabaseCreator.cs" />
     <Compile Include="DataAccessLevel\SQLiteDatabaseWorker.cs" />
-    <Compile Include="DataAccessLevel\TenDaysForecastsDataContext.cs" />
-    <Compile Include="DataAccessLevel\WebTable.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -175,11 +165,15 @@
     <Content Include="Content\themes\base\jquery.ui.slider.css" />
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\ui.daterangepicker.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\date.js" />
+    <Content Include="Scripts\daterangepicker.jQuery.compressed.js" />
+    <Content Include="Scripts\daterangepicker.jQuery.js" />
     <Content Include="Scripts\i18n\grid.locale-ar.js" />
     <Content Include="Scripts\i18n\grid.locale-bg.js" />
     <Content Include="Scripts\i18n\grid.locale-bg1251.js" />

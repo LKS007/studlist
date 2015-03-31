@@ -18,85 +18,54 @@
     </style>
 </head>
 <body>
-<h2>jQGrid</h2>
-<table id="jqg"></table>
-<div id="jpager"></div>
+    <p align="center" style="margin:0px;">
+        <table id="jqg">
+        </table>
+
+    </p>
 <script type="text/javascript">
 $(document).ready(function () {
     $("#jqg").jqGrid({
         url: '@Url.Action("GetData")',
         datatype: "json",
-        colNames: ['Id', 'Country', 'City', 'Street', 'House', 'Index', 'Date'],
+        colNames: ['Country', 'City', 'Street', 'House', 'Index', 'Date'],
         colModel: [
-        { name: 'Id', index: 'Id', width: 30, stype: 'text', key:true },
-        { name: 'Country', index: 'Country', width: 150, editable: true, edittype: 'text', sortable: true },
-        { name: 'City', index: 'City', width: 150, editable: true, edittype: 'text', sortable: true },
-        { name: 'Street', index: 'Street', width: 100, editable: true, edittype: 'text', sortable: false },
-        { name: 'House', index: 'House', width: 80, align: "right", editable: true, edittype: 'text', sortable: true },
-        { name: 'Index', index: 'Index', width: 150, editable: true, edittype: 'text', sortable: true },
-        { name: 'Date', index: 'Date', width: 150, editable: true, edittype: 'text', sortable: true },
+        { name: 'Country', index: 'Country', width: 200, align: "left", editable: true, edittype: 'text', sortable: true },
+        { name: 'City', index: 'City', width: 200, align: "left", editable: true, edittype: 'text', sortable: true },
+        { name: 'Street', index: 'Street', width: 250, align: "left", editable: true, edittype: 'text', sortable: true },
+        { name: 'House', index: 'House', width: 130, align: "left", editable: true, edittype: 'text', sorttype: "int" },
+        { name: 'Indekses', index: 'Indekses', width: 150, align: "left", editable: true, edittype: 'text', sortable: false },
+        { name: 'Date', index: 'Date', width: 200, align: "left", sortable: true, formatter: 'date', formatoptions: { newformat: 'd M Y' } },
         ],
+        ignoreCase: true,
         rowNum: 10,
         rowList: [10, 20, 30],
-        width:760,
-        pager: '#jpager',
+        width:1000,
+        //pager: '#jpager',
         loadonce:true,
         sortname: 'Id',
         sortorder: "desc",
-        caption: "Список Книг",
-        scrollerbar: true,
-    });
-    $("#jqg").jqGrid('navGrid', '#jpager', {
-
-        search: true,
-        searchtext: "Поиск",
-        refresh: false,
-        add: true,
-        del: true,
-        edit: true,
-        view: true,
-        viewtext: "Смотреть",
-        viewtitle: "Выбранная запись",
-        addtext: "Добавить",
-        edittext: "Изменить",
-        deltext: "Удалить"
-    }, 
-    update("edit"), 
-    update("add"),
-    update("del")
-    );
-    function update(act) {
-        return {
-            closeAfterAdd: true,
-            height: 230,
-            width: 400,
-            closeAfterEdit: true,
-            reloadAfterSubmit: true,
-            drag: true,
-            onclickSubmit: function (params) {
-                var list = $("#jqg");
-                var selectedRow = list.getGridParam("selrow");
-                rowData = list.getRowData(selectedRow);
-                if (act === "add")
-                    params.url= '@Url.Action("Create")';
-                else if (act === "del") {
-                    params.url = '@Url.Action("Delete")';
-                    //var selectedrowindex = jQuery("#grid").jqGrid('getGridParam', 'selrow');
-                    //var dataFromCellByColumnIndex = jQuery('#grid').jqGrid('getCell', selectedrowindex, 1);
-                    params.serializeDelData = rowData.Id;
-                    
-                    console.log(rowData.Id);
+        caption: "Адресная книга",
+        //  scrollerbar: true,
+        height: "100%",
+        loadComplete: function () {
+           //   var ids = grid.jqGrid('getDataIDs');
+            var ids = jQuery("#jqg").getDataIDs();
+           
+                
+            if (ids) {
+                var sortName = jQuery("#jqg").getGridParam("sortname");//', 'sortname');
+                var sortOrder = jQuery("#jqg").getGridParam("sortorder");
+                for (var i = 0; i < ids.length; i++) {
+                    jQuery("#jqg").setCell(ids[i], sortName, '', '', { style: (sortOrder === 'asc' ? 'color:blue;' : 'color:blue;') });
                 }
-                else if (act === "edit")
-                    params.url = '@Url.Action("Edit")';
-            },
-            afterSubmit: function (response, postdata) {
-                $(this).jqGrid('setGridParam', { datatype: 'json' }).trigger('reloadGrid')
-                return [true, "", 0]
             }
-        };
-    };
+        },
+        });
+    $("#jqg").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: 'cn' });
+    
 });
+    
 </script> 
 </body>
 </html>

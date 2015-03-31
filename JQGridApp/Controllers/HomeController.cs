@@ -42,6 +42,7 @@ namespace JQGridApp.Controllers
 
         public string GetData()
         {
+            string formatsrc = "dd-MM-yyyy";
              SQLiteDatabaseWorker SQLworker = new SQLiteDatabaseWorker();
             List<Catalog> table = new List<Catalog>();
             SQLworker.SetConnect();

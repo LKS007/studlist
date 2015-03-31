@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Globalization;
 using System.Data.SQLite;
 using System.IO;
 using System.Data.Common;
 using System.Data;
-using MvcApplication1.DataAccessLevel;
+//using JQGridApp.DataAccessLevel;
 using JQGridApp.Models;
 
 
@@ -66,8 +66,11 @@ namespace TheTime.DataAccessLevel
                     int house = int.Parse(reader["House"].ToString());
                     string indexes = reader["Indexes"].ToString();
                     DateTime period = DateTime.Parse(reader["Date"].ToString());
-
-                    table.Add(new Catalog { Id = id, Country = country, City = city, Street = street, House = house, Indekses = indexes, Date = period });
+                    string dats = period.ToString("dd-MM-yyyy");
+                    DateTime result = DateTime.ParseExact(dats,"dd-MM-yyyy",CultureInfo.InvariantCulture);
+                    table.Add(new Catalog { Id = id, Country = country,
+                        City = city, Street = street,
+                        House = house, Indekses = indexes, Date = result });
                     
                 }
             }
